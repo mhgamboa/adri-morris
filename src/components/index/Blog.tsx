@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 export default function Blog() {
@@ -38,11 +39,11 @@ export default function Blog() {
             <div className="p-5">
               <div className="relative">
                 <a href="#" title="" className="block aspect-w-4 aspect-h-3">
-                  <img
+                  {/* <Image
                     className="object-cover w-full h-full"
                     src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/2/blog-post-1.jpg"
                     alt=""
-                  />
+                  /> */}
                 </a>
 
                 <div className="absolute top-4 left-4">
@@ -80,11 +81,11 @@ export default function Blog() {
             <div className="p-5">
               <div className="relative">
                 <a href="#" title="" className="block aspect-w-4 aspect-h-3">
-                  <img
+                  {/* <Image
                     className="object-cover w-full h-full"
                     src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/2/blog-post-2.jpg"
                     alt=""
-                  />
+                  /> */}
                 </a>
 
                 <div className="absolute top-4 left-4">
@@ -122,11 +123,11 @@ export default function Blog() {
             <div className="p-5">
               <div className="relative">
                 <a href="#" title="" className="block aspect-w-4 aspect-h-3">
-                  <img
+                  {/* <Image
                     className="object-cover w-full h-full"
                     src="https://cdn.rareblocks.xyz/collection/celebration/images/blog/2/blog-post-3.jpg"
                     alt=""
-                  />
+                  /> */}
                 </a>
 
                 <div className="absolute top-4 left-4">

@@ -1,23 +1,21 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 
 export default function Nav() {
   const [menuState, setMenuState] = useState(false);
 
-  // Replace javascript:void(0) path with your path
   const navigation = [
-    { title: "Customers", path: "javascript:void(0)" },
-    { title: "Careers", path: "javascript:void(0)" },
-    { title: "Guides", path: "javascript:void(0)" },
-    { title: "Partners", path: "javascript:void(0)" },
+    { title: "Customers", path: "#" },
+    { title: "Careers", path: "#" },
+    { title: "Guides", path: "#" },
+    { title: "Partners", path: "#" },
   ];
   return (
     <nav className="bg-white border-b">
       <div className="flex items-center space-x-8 py-3 px-4 max-w-screen-xl mx-auto md:px-8">
         <div className="flex-none lg:flex-initial">
-          <a href="javascript:void(0)">
-            <img src="https://www.floatui.com/logo.svg" width={120} height={50} alt="Float UI logo" />
-          </a>
+          <a href="#">{/* <Image src="https://www.floatui.com/logo.svg" width={120} height={50} alt="Float UI logo" /> */}</a>
         </div>
         <div className="flex-1 flex items-center justify-between">
           <div className={`bg-white absolute z-20 w-full top-16 left-0 p-4 border-b lg:static lg:block lg:border-none ${menuState ? "" : "hidden"}`}>
