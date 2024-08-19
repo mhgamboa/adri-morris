@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main>
       {/* <Hero /> */}
-      <Nav />
+      {/* <Nav /> */}
       <section className="py-10 bg-gray-50 sm:py-16 lg:py-24">
         <div className="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
           <div className="grid items-center grid-cols-1 gap-y-6 md:grid-cols-2 md:gap-x-20">
