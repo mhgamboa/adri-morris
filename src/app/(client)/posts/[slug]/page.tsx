@@ -5,7 +5,7 @@ import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 
 const getPost = async (slug: string) => {
-  const query = `*[_type == "post" && slug.current == "${slug}"][0] {
+  const query = `*[_type == "blogPost" && slug.current == "${slug}"][0] {
     title,
     slug,
     publishedAt,
@@ -33,7 +33,7 @@ export default async function page({ params }: { params: { slug: string } }) {
 
       <Image src={urlFor(post.titleImage).url()} width={400} height={400} alt="Title Image" priority className="rounded-lg mt-8 border" />
 
-      <div className="container mt-16 prose prose-blue prose-lg dark:prose-invert prose-li:marker:text-primary prose-a:text-primary bg-red-500">
+      <div className="container mt-16 prose prose-blue prose-lg dark:prose-invert prose-li:marker:text-primary prose-a:text-primary">
         <PortableText value={post.content} />
       </div>
     </div>

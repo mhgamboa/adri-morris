@@ -1,8 +1,8 @@
 import { defineType, Rule } from "sanity";
 
-export const post = defineType({
-  name: "post",
-  title: "Post",
+export const blogPost = defineType({
+  name: "blogPost",
+  title: "Blog Posts",
   type: "document",
   fields: [
     { name: "title", title: "Title", type: "string", validation: (Rule: Rule) => Rule.required().error("Required") },
