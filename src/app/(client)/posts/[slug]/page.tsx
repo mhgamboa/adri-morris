@@ -1,6 +1,7 @@
 import React from "react";
 import { client } from "@/sanity/lib/client";
-import { PortableText } from "next-sanity";
+// import { PortableText } from "next-sanity";
+import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 
@@ -22,7 +23,6 @@ const getPost = async (slug: string) => {
 
 export default async function page({ params }: { params: { slug: string } }) {
   const post = await getPost(params.slug);
-
   return (
     <div className="mt-8 flex flex-col items-center justify-center px-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <h1>
@@ -33,7 +33,7 @@ export default async function page({ params }: { params: { slug: string } }) {
 
       <Image src={urlFor(post.titleImage).url()} width={400} height={400} alt="Title Image" priority className="rounded-lg mt-8 border" />
 
-      <div className="container mt-16 prose prose-blue prose-lg dark:prose-invert prose-li:marker:text-primary prose-a:text-primary">
+      <div className="container mt-16 prose prose-blue prose-lg dark:prose-invert prose-li:marker:text-primary prose-a:text-primary whitespace-pre-line">
         <PortableText value={post.content} />
       </div>
     </div>
