@@ -3,15 +3,11 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+import { navigation } from "@/components/ui/data";
+
 export default function Nav() {
   const [menuState, setMenuState] = useState(false);
 
-  const navigation = [
-    { title: "Blog", path: "#" },
-    { title: "About", path: "/about" },
-    // { title: "Guides", path: "#" },
-    // { title: "Partners", path: "#" },
-  ];
   return (
     <nav className="bg-white border-b">
       <div className="flex items-center space-x-8 py-3 px-4 max-w-screen-xl mx-auto md:px-8">
