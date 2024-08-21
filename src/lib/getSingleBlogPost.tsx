@@ -1,3 +1,4 @@
+import "server-only";
 import { client } from "@/sanity/lib/client";
 import { redirect } from "next/navigation";
 
@@ -10,8 +11,7 @@ export default async function getSingleBlogPost(slug: string) {
     content,
     titleImage,
     _id
-}
-  `;
+    }`;
 
   const blogPost = await client.fetch(query);
   if (!blogPost) redirect("/error");
