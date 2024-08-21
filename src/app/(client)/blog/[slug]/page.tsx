@@ -19,7 +19,7 @@ const getPost = async (slug: string) => {
 }
   `;
 
-  const post = client.fetch(query);
+  const post = client.fetch(query, { dynamic: true });
   return post;
 };
 
