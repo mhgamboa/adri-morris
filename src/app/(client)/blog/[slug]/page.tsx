@@ -39,7 +39,7 @@ export default async function page({ params }: { params: { slug: string } }) {
         <PortableText
           value={post.content}
           components={{
-            // Styleing for Lists
+            // Styling for Lists
             list: {
               number: ({ children }) => <div className="list-decimal">{children}</div>,
               bullet: ({ children }) => <div className="list-disc">{children}</div>,
