@@ -4,27 +4,13 @@ import { PortableText } from "next-sanity";
 // import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
+import type { Metadata, ResolvingMetadata } from "next";
+import getSingleBlogPost from "@/lib/getSingleBlogPost";
 
 export const dynamic = "force-dynamic";
 
-const getPost = async (slug: string) => {
-  const query = `*[_type == "blogPost" && slug.current == "${slug}"][0] {
-    title,
-    slug,
-    publishedAt,
-    excerpt,
-    content,
-    titleImage,
-    _id
-}
-  `;
-
-  const post = client.fetch(query, { dynamic: true });
-  return post;
-};
-
 export default async function page({ params }: { params: { slug: string } }) {
-  const post = await getPost(params.slug);
+  const post = await getSingleBlogPost(params.slug);
   return (
     <div className="mt-8 flex flex-col items-center justify-center px-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <h1>
@@ -49,4 +35,19 @@ export default async function page({ params }: { params: { slug: string } }) {
       </div>
     </div>
   );
+}
+
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const { slug } = params;
+  const post = await getSingleBlogPost(slug);
+
+  return {
+    title: `${post.title}`,
+    description: `Adri Morrs - Blog`,
+  };
 }
