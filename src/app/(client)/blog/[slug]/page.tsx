@@ -1,7 +1,7 @@
 import React from "react";
 import { client } from "@/sanity/lib/client";
-// import { PortableText } from "next-sanity";
-import { PortableText } from "@portabletext/react";
+import { PortableText } from "next-sanity";
+// import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 
@@ -36,7 +36,16 @@ export default async function page({ params }: { params: { slug: string } }) {
       <Image src={urlFor(post.titleImage).url()} width={400} height={400} alt="Title Image" priority className="rounded-lg mt-8 border" />
 
       <div className="container mt-16 prose prose-blue prose-lg dark:prose-invert prose-li:marker:text-primary prose-a:text-primary whitespace-pre-line pb-16">
-        <PortableText value={post.content} />
+        <PortableText
+          value={post.content}
+          components={{
+            // Styleing for Lists
+            list: {
+              number: ({ children }) => <div className="list-decimal">{children}</div>,
+              bullet: ({ children }) => <div className="list-disc">{children}</div>,
+            },
+          }}
+        />
       </div>
     </div>
   );
