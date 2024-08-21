@@ -20,11 +20,10 @@ export default function Footer() {
           ))}
         </ul>
         <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-          © 2021-2022{" "}
+          © {new Date().getFullYear()}{" "}
           <a href="#" className="hover:underline">
-            Flowbite™
+            Adri Morris
           </a>
-          . All Rights Reserved.
         </span>
       </div>
     </footer>
