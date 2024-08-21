@@ -5,7 +5,7 @@ import { PortableText } from "next-sanity";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import type { Metadata, ResolvingMetadata } from "next";
-import getSingleBlogPost from "@/lib/getSingleBlogPost";
+import getSingleBlogPost from "@/queries/getSingleBlogPost";
 
 export const dynamic = "force-dynamic";
 
