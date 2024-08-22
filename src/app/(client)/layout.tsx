@@ -7,8 +7,8 @@ import Footer from "@/components/ui/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Adri Morrison",
-  description: "Adri Morrison's personal website",
+  title: "Adri Morris",
+  description: "Adri Morris's personal website",
 };
 
 export default function RootLayout({
@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={inter.className}>
         <Nav />
         {children}
         <Footer />
