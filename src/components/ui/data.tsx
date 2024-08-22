@@ -1,4 +1,4 @@
 export const navigation = [
-  { title: "Blog", path: "#" },
+  { title: "Blog", path: "/blog" },
   { title: "About", path: "/about" },
 ];
