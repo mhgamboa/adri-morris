@@ -2,8 +2,10 @@ import Blog from "@/components/index/Blog";
 import Hero from "@/components/index/Hero";
 import Image from "next/image";
 import Nav from "@/components/ui/Nav";
+import getFrontPage from "@/queries/getFrontPage";
 
-export default function Home() {
+export default async function Home() {
+  const { title, subtitle } = await getFrontPage();
   return (
     <main>
       {/* <Hero /> */}
@@ -12,16 +14,25 @@ export default function Home() {
         <div className="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
           <div className="grid items-center grid-cols-1 gap-y-6 md:grid-cols-2 md:gap-x-20">
             <div className="">
-              <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Grow business with Celebration.</h2>
+              <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
+                {/* Grow business with Celebration. */}
+                {title}
+              </h2>
               <p className="mt-4 text-base leading-relaxed text-gray-600">
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation
-                veniam consequat sunt nostrud amet.
+                {/* Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
+                officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud
+                amet. */}
+                {subtitle}
               </p>
             </div>
 
             <div className="relative pl-20 pr-6 sm:pl-6 md:px-0">
               <div className="relative w-full max-w-xs mt-4 mb-10 ml-auto">
-                <img className="ml-auto" src="https://cdn.rareblocks.xyz/collection/celebration/images/features/1/person.jpg" alt="" />
+                <img
+                  className="ml-auto"
+                  src="https://cdn.rareblocks.xyz/collection/celebration/images/features/1/person.jpg"
+                  alt=""
+                />
 
                 <img
                   className="absolute -top-4 -left-12"
