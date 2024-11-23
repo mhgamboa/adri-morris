@@ -4,8 +4,11 @@ import Image from "next/image";
 import Nav from "@/components/ui/Nav";
 import getFrontPage from "@/queries/getFrontPage";
 
+// export const revalidate = 60;
+
 export default async function Home() {
-  const { title, subtitle } = await getFrontPage();
+  const { title, subtitle, imageURL } = await getFrontPage();
+
   return (
     <main>
       {/* <Hero /> */}
@@ -24,23 +27,33 @@ export default async function Home() {
                 amet. */}
                 {subtitle}
               </p>
+              {/* Hero Image */}
             </div>
 
-            <div className="relative pl-20 pr-6 sm:pl-6 md:px-0">
-              <div className="relative w-full max-w-xs mt-4 mb-10 ml-auto">
-                <img
+            {/* relative pl-20 pr-6 sm:pl-6 md:px-0 */}
+            <div className="relative sm:pl-6 md:px-0">
+              <div className="relative w-full max-w-xs mt-4 mb-10 mx-auto">
+                {/* Replace with Image */}
+                <Image
+                  src={imageURL}
+                  alt="Hero Image"
+                  width={1200}
+                  height={600}
+                  className="rounded-lg"
+                />
+                {/* <img
                   className="ml-auto"
                   src="https://cdn.rareblocks.xyz/collection/celebration/images/features/1/person.jpg"
                   alt=""
-                />
+                /> */}
 
-                <img
+                {/* <img
                   className="absolute -top-4 -left-12"
                   src="https://cdn.rareblocks.xyz/collection/celebration/images/features/1/wavey-lines.svg"
                   alt=""
-                />
+                /> */}
 
-                <div className="absolute -bottom-10 -left-16">
+                {/* <div className="absolute -bottom-10 -left-16">
                   <div className="bg-yellow-300">
                     <div className="px-8 py-10">
                       <span className="block text-4xl font-bold text-black lg:text-5xl"> 53% </span>
@@ -52,7 +65,7 @@ export default async function Home() {
                       </span>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

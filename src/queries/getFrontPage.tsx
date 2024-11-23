@@ -5,12 +5,14 @@ import { redirect } from "next/navigation";
 export default async function getFrontPage() {
   const query = `*[_type == "frontPage"][0] {
     title,
-    subtitle
+    subtitle,
+    "imageURL": heroImage.asset->url  
     }`;
 
   try {
     const frontPage = await client.fetch(query);
     if (!frontPage) redirect("/error");
+    console.log("frontPage", frontPage);
     return frontPage;
   } catch (error) {
     console.log(error);
