@@ -84,7 +84,7 @@ export default async function Blog() {
             </div>
           ))} */}
 
-          {blogPosts.map(blog => {
+          {blogPosts.map((blog: any) => {
             console.log(blog);
             const slug = blog.slug.current;
             return (
