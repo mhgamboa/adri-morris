@@ -1,10 +1,10 @@
 import React from "react";
 import Link from "next/link";
+import getblogPosts from "@/queries/getblogPosts";
 
 export default async function Home() {
-  const slug = "my-first-blog-post";
-  const title = "My First Blog Post";
-  const excerpt = "lorem ipsum dolor sit amet consectetur adipisicing elit. fugiat, quae";
+  const posts = await getblogPosts();
+
   return (
     <div className="divide-y divide-gray-200 dark:divide-gray-700 mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0">
       <div className="space-y-2 pb-8 pt-6 md:space-y-5">
@@ -14,122 +14,52 @@ export default async function Home() {
         <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">Description Goes Here</p>
       </div>
       <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-        {/* {!posts.length && "No posts found."} */}
-        {/* {posts.slice(0, MAX_DISPLAY).map(post => {
-            const { slug, date, title, summary, tags } = post;
-            return (
-              <li key={slug} className="py-12">
-                <article>
-                  <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                    <dl>
-                      <dt className="sr-only">Published on</dt>
-                      <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                        <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
-                      </dd>
-                    </dl>
-                    <div className="space-y-5 xl:col-span-3">
-                      <div className="space-y-6">
-                        <div>
-                          <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                            <Link href={`/blog/${slug}`} className="text-gray-900 dark:text-gray-100">
-                              {title}
-                            </Link>
-                          </h2>
-                          <div className="flex flex-wrap">
-                            {tags.map(tag => (
-                              <Tag key={tag} text={tag} />
-                            ))}
-                          </div>
-                        </div>
-                        <div className="prose max-w-none text-gray-500 dark:text-gray-400">{summary}</div>
+        {!posts.length && "No posts found."}
+        <li className="py-12">
+          <article>
+            {posts.map((post, i) => {
+              const { title, excerpt } = post;
+              const slug = post.slug.current;
+              return (
+                <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+                  <dl>
+                    <dt className="sr-only">Published on</dt>
+                    <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                      <time>{post.publishedAt}</time>
+                      {/* <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time> */}
+                    </dd>
+                    <div className="w-36 h-36 rounded overflow-hidden">
+                      <Link href={`/blog/${slug}`}>
+                        <img className="w-full object-cover" src={post.imageURL} alt="people" />
+                      </Link>
+                    </div>
+                  </dl>
+                  <div className="space-y-5 xl:col-span-3">
+                    <div className="space-y-6">
+                      <div>
+                        <h2 className="text-2xl font-bold leading-8 tracking-tight">
+                          <Link href={`/blog/${slug}`} className="text-gray-900 dark:text-gray-100">
+                            {title}
+                          </Link>
+                        </h2>
                       </div>
-                      <div className="text-base font-medium leading-6">
-                        <Link
-                          href={`/blog/${slug}`}
-                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                          aria-label={`Read more: "${title}"`}
-                        >
-                          Read more &rarr;
-                        </Link>
+                      <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+                        {excerpt}
                       </div>
                     </div>
-                  </div>
-                </article>
-              </li>
-            );
-          })} */}
-        <li className="py-12">
-          <article>
-            <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-              <dl>
-                <dt className="sr-only">Published on</dt>
-                <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                  <time>Date Goes Here</time>
-                  {/* <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time> */}
-                </dd>
-                <div className="w-36 h-36 rounded overflow-hidden">
-                  <img
-                    className="w-full object-cover"
-                    src="https://cdn.rareblocks.xyz/collection/celebration/images/features/1/person.jpg"
-                    alt="people"
-                  />
-                </div>
-              </dl>
-              <div className="space-y-5 xl:col-span-3">
-                <div className="space-y-6">
-                  <div>
-                    <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                      <Link href={`/blog/${slug}`} className="text-gray-900 dark:text-gray-100">
-                        {title}
+                    <div className="text-base font-medium leading-6">
+                      <Link
+                        href={`/blog/${slug}`}
+                        className="text-blue-500 hover:text-blue-600 dark:hover:text-primary-400"
+                        aria-label={`Read more: "${title}"`}
+                      >
+                        Read more &rarr;
                       </Link>
-                    </h2>
+                    </div>
                   </div>
-                  <div className="prose max-w-none text-gray-500 dark:text-gray-400">{excerpt}</div>
                 </div>
-                <div className="text-base font-medium leading-6">
-                  <Link
-                    href={`/blog/${slug}`}
-                    className="text-blue-500 hover:text-blue-600 dark:hover:text-primary-400"
-                    aria-label={`Read more: "${title}"`}
-                  >
-                    Read more &rarr;
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </article>
-        </li>
-        <li className="py-12">
-          <article>
-            <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-              <dl>
-                <dt className="sr-only">Published on</dt>
-                <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                  {/* <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time> */}
-                </dd>
-              </dl>
-              <div className="space-y-5 xl:col-span-3">
-                <div className="space-y-6">
-                  <div>
-                    <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                      <Link href={`/blog/${slug}`} className="text-gray-900 dark:text-gray-100">
-                        {title}
-                      </Link>
-                    </h2>
-                  </div>
-                  <div className="prose max-w-none text-gray-500 dark:text-gray-400">{excerpt}</div>
-                </div>
-                <div className="text-base font-medium leading-6">
-                  <Link
-                    href={`/blog/${slug}`}
-                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                    aria-label={`Read more: "${title}"`}
-                  >
-                    Read more &rarr;
-                  </Link>
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </article>
         </li>
       </ul>

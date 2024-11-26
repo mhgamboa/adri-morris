@@ -12,7 +12,7 @@ export default async function getFrontPage() {
   try {
     const frontPage = await client.fetch(query);
     if (!frontPage) redirect("/error");
-    console.log("frontPage", frontPage);
+
     return frontPage;
   } catch (error) {
     console.log(error);

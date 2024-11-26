@@ -1,14 +1,25 @@
 "server-only";
 import { client } from "@/sanity/lib/client";
 import { redirect } from "next/navigation";
-export default async function getblogPosts() {
-  const query = `*[_type == "blogPost"] {
+export default async function getblogPosts(quantity?: number) {
+  //   let query = `*[_type == "blogPost"] {
+  //     title,
+  //     slug,
+  //     publishedAt,
+  //     excerpt,
+  //     _id
+  // }`;
+
+  let query = `*[_type == "blogPost"] | order(publishedAt desc)${
+    quantity ? `[0..${quantity - 1}]` : ""
+  } {
     title,
     slug,
     publishedAt,
     excerpt,
-    _id
-}`;
+    _id,
+    "imageURL": titleImage.asset->url  
+  }`;
 
   try {
     const blogPosts = await client.fetch(query);
