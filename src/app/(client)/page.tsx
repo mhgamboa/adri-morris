@@ -4,7 +4,7 @@ import Image from "next/image";
 import Nav from "@/components/ui/Nav";
 import getFrontPage from "@/queries/getFrontPage";
 
-// export const revalidate = 60;
+export const revalidate = process.env.NODE_ENV === "production" ? 60 : 0;
 
 export default async function Home() {
   const { title, subtitle, imageURL } = await getFrontPage();
