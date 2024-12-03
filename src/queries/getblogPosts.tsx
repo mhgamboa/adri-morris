@@ -25,7 +25,7 @@ export default async function getblogPosts(quantity?: number) {
     const blogPosts = await client.fetch(query);
     return blogPosts;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     redirect("/error");
   }
 }

@@ -18,7 +18,7 @@ export default async function getSingleBlogPost(slug: string) {
     if (!blogPost) redirect("/error");
     return blogPost;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     redirect("/error");
   }
 }

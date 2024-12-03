@@ -15,7 +15,7 @@ export default async function getFrontPage() {
 
     return frontPage;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     redirect("/error");
   }
 }

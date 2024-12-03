@@ -29,7 +29,7 @@ const blogPreviews = [
 
 export default async function Blog() {
   const blogPosts = await getblogPosts();
-  console.log("blogPosts", blogPosts);
+
   return (
     <section className="py-10 bg-gray-50 sm:py-16 lg:py-24">
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
@@ -85,7 +85,6 @@ export default async function Blog() {
           ))} */}
 
           {blogPosts.map((blog: any) => {
-            console.log(blog);
             const slug = blog.slug.current;
             return (
               <div key={blog.title} className="overflow-hidden bg-white rounded shadow">
