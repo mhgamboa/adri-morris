@@ -1,48 +1,10 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { motion, type Variants } from "framer-motion";
 import adriPortrait from "@/assets/images/adri-portrait.jpg";
-
-const heroTextVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  },
-};
-
-const heroImageVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.8,
-      delay: 0.3,
-      ease: "easeOut",
-    },
-  },
-};
-
-const buttonVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: custom => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      delay: 0.5 + custom * 0.1,
-      ease: "easeOut",
-    },
-  }),
-};
+import MotionDiv from "@/components/animation/wrappers/motion-div";
+import MotionP from "@/components/animation/wrappers/motion-p";
+import { HeroAnimation } from "./HeroAnimation";
 
 export function Hero() {
   return (
@@ -50,11 +12,11 @@ export function Hero() {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Hero Image on Mobile (Shown First) */}
-          <motion.div
+          <MotionDiv
             className="order-2 md:order-2 relative h-[400px] md:h-[600px] mx-auto w-full flex justify-center"
             initial="hidden"
             animate="visible"
-            variants={heroImageVariants}
+            variants={HeroAnimation.heroImageVariants}
           >
             <div className="relative h-[400px] w-full max-w-sm md:max-w-none md:h-[600px]">
               <Image
@@ -65,14 +27,14 @@ export function Hero() {
                 priority
               />
             </div>
-          </motion.div>
+          </MotionDiv>
 
           {/* Text Content */}
-          <motion.div
+          <MotionDiv
             className="order-1 md:order-1 text-center lg:text-left"
             initial="hidden"
             animate="visible"
-            variants={heroTextVariants}
+            variants={HeroAnimation.heroTextVariants}
           >
             <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light text-gray-800 mb-6">
               <span className="font-serif italic text-blue-700">Profit</span> with purpose.
@@ -80,14 +42,19 @@ export function Hero() {
               Numbers with heart.
               <br />A roadmap to the life you actually want.
             </h1>
-            <motion.p
+            <MotionP
               className="text-lg text-gray-700 mb-8 lg:max-w-xl"
-              variants={heroTextVariants}
+              variants={HeroAnimation.heroTextVariants}
             >
               No more financial roller-coaster. Just a clear path forward.
-            </motion.p>
+            </MotionP>
             <div className="flex flex-col md:flex-row gap-4">
-              <motion.div variants={buttonVariants} custom={0} initial="hidden" animate="visible">
+              <MotionDiv
+                variants={HeroAnimation.buttonVariants}
+                custom={0}
+                initial="hidden"
+                animate="visible"
+              >
                 <Button
                   asChild
                   size="lg"
@@ -97,8 +64,13 @@ export function Hero() {
                     Explore Services
                   </Link>
                 </Button>
-              </motion.div>
-              <motion.div variants={buttonVariants} custom={1} initial="hidden" animate="visible">
+              </MotionDiv>
+              <MotionDiv
+                variants={HeroAnimation.buttonVariants}
+                custom={1}
+                initial="hidden"
+                animate="visible"
+              >
                 <Button
                   asChild
                   size="lg"
@@ -109,9 +81,9 @@ export function Hero() {
                     About Me
                   </Link>
                 </Button>
-              </motion.div>
+              </MotionDiv>
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
       </div>
     </section>
