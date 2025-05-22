@@ -1,92 +1,213 @@
+"use client";
+
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { motion, useAnimation, type Variants } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import adriPortrait from "@/assets/images/adri-portrait.jpg";
 
 export default function About() {
+  // Animation variants
+  const heroVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const sectionVariants: Variants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const imageVariants: Variants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.7,
+        delay: 0.2,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: custom => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        delay: 0.1 * custom,
+        ease: "easeOut",
+      },
+    }),
+  };
+
+  // Section animations
+  const bioControls = useAnimation();
+  const [bioRef, bioInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
+
+  const philosophyControls = useAnimation();
+  const [philosophyRef, philosophyInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
+
+  const ctaControls = useAnimation();
+  const [ctaRef, ctaInView] = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
+
+  // Start animations when sections come into view
+  useEffect(() => {
+    if (bioInView) bioControls.start("visible");
+    if (philosophyInView) philosophyControls.start("visible");
+    if (ctaInView) ctaControls.start("visible");
+  }, [bioInView, philosophyInView, ctaInView, bioControls, philosophyControls, ctaControls]);
+
   return (
     <main className="pt-24">
       {/* Hero Section */}
-      <section className="py-16 bg-rose-50">
+      <motion.section
+        className="py-16 bg-blue-50"
+        initial="hidden"
+        animate="visible"
+        variants={heroVariants}
+      >
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-light mb-6">
-              About <span className="font-serif italic text-rose-700">Adri Morris</span>
-            </h1>
-            <p className="text-xl text-gray-700 leading-relaxed">
-              Passionate about empowering others to discover their potential and achieve meaningful
-              growth.
-            </p>
+            <motion.h1
+              className="text-4xl md:text-5xl font-light mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              <span className="font-serif italic text-blue-700">About</span>
+            </motion.h1>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Bio Section */}
-      <section className="py-16">
+      <motion.section
+        className="py-16"
+        ref={bioRef}
+        initial="hidden"
+        animate={bioControls}
+        variants={sectionVariants}
+      >
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="relative h-[600px]">
+            <motion.div className="relative h-[600px]" variants={imageVariants}>
               <Image
                 src={adriPortrait}
                 alt="Adri Morris"
                 fill
-                className="object-cover object-center"
+                className="object-cover object-top"
               />
-            </div>
-            <div>
-              <h2 className="text-3xl font-light mb-6">My Story</h2>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={bioControls}
+              variants={{
+                visible: {
+                  opacity: 1,
+                  x: 0,
+                  transition: { duration: 0.6, delay: 0.3 },
+                },
+              }}
+            >
+              <h2 className="text-3xl font-light mb-6 text-blue-700">Hi, I'm Adri.</h2>
               <div className="space-y-4 text-gray-700">
                 <p>
-                  With over a decade of experience in personal and professional development, I've
-                  dedicated my career to helping individuals and organizations unlock their full
-                  potential.
+                  With over 20 years of experience in accounting and bookkeeping — and as a business
+                  owner myself — I understand how powerful it is to be able to hand off your
+                  financial to-dos to someone you trust.{" "}
+                  <i>
+                    Someone who gets the details right, every time, and sees the big picture too.
+                  </i>
                 </p>
                 <p>
-                  My journey began in the corporate world, where I quickly recognized that success
-                  isn't just about strategies and systems—it's about the people behind them. This
-                  realization led me to pursue advanced training in coaching and development,
-                  allowing me to create a unique approach that combines practical business acumen
-                  with deep personal growth work.
+                  But here's the thing: even with all my experience helping hundreds of clients, I
+                  used to feel anxious about my own finances. My go-to strategy? Avoidance.
+                  (Spoiler: it doesn't work.)
                 </p>
                 <p>
-                  I believe that true transformation happens when we align our personal values with
-                  our professional goals. My mission is to guide clients through this process,
-                  helping them create lives and careers that are not only successful but deeply
-                  fulfilling.
+                  Everything started to change when I found the Profit First system. It gave me
+                  structure — but it wasn&apos;t until I discovered Profit For Keeps that things
+                  really clicked. It helped me not just get clear on my numbers, but connect them to
+                  the life I actually wanted to live.
                 </p>
                 <p>
-                  When I'm not working with clients, you can find me exploring hiking trails,
-                  practicing yoga, or curled up with a good book. I'm based in San Francisco but
-                  work with clients globally.
+                  That transformation is what fuels my work today. I'm here to help business owners
+                  build sustainable, profitable businesses — and more importantly, lives that feel{" "}
+                  <b className="text-blue-700">aligned, empowered, and free</b>.
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Philosophy Section */}
-      <section className="py-16 bg-gray-50">
+      <motion.section
+        className="py-16 bg-gray-50"
+        ref={philosophyRef}
+        initial="hidden"
+        animate={philosophyControls}
+        variants={sectionVariants}
+      >
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-12">
+          <motion.div
+            className="max-w-3xl mx-auto text-center mb-12"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.5 },
+              },
+            }}
+          >
             <h2 className="text-3xl font-light mb-6">My Philosophy</h2>
             <p className="text-lg text-gray-700">
               I believe in a holistic approach to personal and professional development that honors
               your unique journey while providing practical tools for growth.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
               {
                 title: "Authenticity",
                 description:
-                  "True growth begins with embracing who you really are. I create a safe space for you to explore your authentic self and build from there.",
+                  "I create a safe space for you to explore your authentic self and build from there.",
               },
               {
                 title: "Balance",
                 description:
-                  "Success isn't sustainable without balance. I help you create strategies that honor all aspects of your life and well-being.",
+                  "Success isn't sustainable without balance. With the Profit for Keeps® system, we will look at both your business and personal finances to create your ideal lifestyle.",
               },
               {
                 title: "Continuous Growth",
@@ -94,79 +215,92 @@ export default function About() {
                   "Development is a journey, not a destination. I provide tools and support for ongoing evolution, both personal and professional.",
               },
             ].map((item, index) => (
-              <div key={index} className="bg-white p-8 shadow-sm">
-                <h3 className="text-xl font-medium mb-4 text-rose-700">{item.title}</h3>
+              <motion.div
+                key={index}
+                className="bg-white p-8 shadow-sm"
+                custom={index}
+                variants={cardVariants}
+              >
+                <h3 className="text-xl font-medium mb-4 text-teal-700">{item.title}</h3>
                 <p className="text-gray-700">{item.description}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
-
-      {/* Credentials Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-light mb-8 text-center">Credentials & Experience</h2>
-
-            <div className="space-y-8">
-              <div className="border-l-4 border-rose-200 pl-6">
-                <h3 className="text-xl font-medium mb-2">Certified Professional Coach</h3>
-                <p className="text-gray-600 mb-1">International Coach Federation (ICF)</p>
-                <p className="text-gray-700">
-                  Completed 500+ hours of coaching training and 1,000+ client hours
-                </p>
-              </div>
-
-              <div className="border-l-4 border-rose-200 pl-6">
-                <h3 className="text-xl font-medium mb-2">Master's in Organizational Psychology</h3>
-                <p className="text-gray-600 mb-1">Stanford University</p>
-                <p className="text-gray-700">
-                  Specialized in leadership development and organizational change
-                </p>
-              </div>
-
-              <div className="border-l-4 border-rose-200 pl-6">
-                <h3 className="text-xl font-medium mb-2">Former Director of People Development</h3>
-                <p className="text-gray-600 mb-1">Fortune 500 Technology Company</p>
-                <p className="text-gray-700">
-                  Led talent development initiatives for 5,000+ employees globally
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      </motion.section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-rose-700 text-white">
+      <motion.section
+        className="py-16 bg-blue-700 text-white"
+        ref={ctaRef}
+        initial="hidden"
+        animate={ctaControls}
+        variants={sectionVariants}
+      >
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-light mb-6">
-            Ready to <span className="font-serif italic text-rose-200">Work Together</span>?
-          </h2>
-          <p className="text-lg mb-8 max-w-2xl mx-auto">
+          <motion.h2
+            className="text-3xl md:text-4xl font-light mb-6"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.5 },
+              },
+            }}
+          >
+            Ready to <span className="font-serif italic text-teal-200">Work Together</span>?
+          </motion.h2>
+          <motion.p
+            className="text-lg mb-8 max-w-2xl mx-auto"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: { duration: 0.5, delay: 0.2 },
+              },
+            }}
+          >
             Let's connect and discuss how I can help you achieve your personal and professional
             goals.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          </motion.p>
+          <motion.div
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: { duration: 0.5, delay: 0.4 },
+              },
+            }}
+          >
             <Button
               asChild
               size="lg"
-              className="bg-white text-rose-700 hover:bg-rose-100 rounded-none px-8"
+              className="bg-white text-blue-700 hover:bg-blue-100 rounded-none px-8"
             >
-              <Link href="/contact">Get in Touch</Link>
+              <Link prefetch={false} href="/contact">
+                Get in Touch
+              </Link>
             </Button>
             <Button
               asChild
               size="lg"
               variant="outline"
-              className="bg-white/20 text-white border-white hover:bg-white/30 rounded-none px-8"
+              className="bg-teal-600 text-white border-teal-500 hover:bg-teal-700 rounded-none px-8"
             >
-              <Link href="/services">View Services</Link>
+              <a
+                href="https://calendly.com/adri-incite/30min-meet"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Schedule a Call
+              </a>
             </Button>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </main>
   );
 }

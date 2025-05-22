@@ -28,11 +28,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${playfair.variable} ${raleway.variable} font-sans min-h-screen flex flex-col`}
-      >
-        <ThemeProvider attribute="class" defaultTheme="light">
+    <html lang="en" className={`${playfair.variable} ${raleway.variable}`} suppressHydrationWarning>
+      <body className="font-sans min-h-screen flex flex-col">
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <ScrollToTop />
           <Header />
           <div className="flex-grow">{children}</div>
