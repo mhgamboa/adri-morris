@@ -321,7 +321,7 @@ export default function Home() {
             ].map((service, index) => (
               <motion.div
                 key={index}
-                className="p-8 bg-white border border-gray-200 hover:border-blue-200 transition-colors"
+                className="p-8 bg-white border border-gray-200 hover:border-blue-200 transition-colors flex flex-col justify-between"
                 custom={index}
                 variants={cardVariants}
               >
