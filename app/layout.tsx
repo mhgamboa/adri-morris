@@ -6,6 +6,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import ScrollToTop from "@/components/scroll-to-top";
+import { Toaster } from "sonner";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${playfair.variable} ${raleway.variable}`} suppressHydrationWarning>
       <body className="font-sans min-h-screen flex flex-col">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <Toaster position="bottom-right" />
           <ScrollToTop />
           <Header />
           <div className="flex-grow">{children}</div>

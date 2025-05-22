@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { LineChartIcon } from "lucide-react";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 import { GrGroup } from "react-icons/gr";
 import { MdAttachMoney } from "react-icons/md";
 import { TbZoomMoney } from "react-icons/tb";
@@ -471,7 +471,6 @@ export default function Home() {
           </motion.div>
         </div>
       </motion.section>
-      <Toaster position="bottom-right" />
     </main>
   );
 }
