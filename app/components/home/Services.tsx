@@ -1,37 +1,12 @@
-"use client";
-
 import Link from "next/link";
-import { motion, useAnimation, type Variants } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import { LineChartIcon } from "lucide-react";
 import { GrGroup } from "react-icons/gr";
 import { MdAttachMoney } from "react-icons/md";
 import { TbZoomMoney } from "react-icons/tb";
-
-const sectionVariants: Variants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  },
-};
-
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: custom => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      delay: 0.2 * custom,
-      ease: "easeOut",
-    },
-  }),
-};
+import MotionH2 from "@/components/animation/wrappers/motion-h2";
+import MotionDiv from "@/components/animation/wrappers/motion-div";
+import MotionSection from "@/components/animation/wrappers/motion-section";
+import { ServicesAnimation } from "./ServicesAnimation";
 
 const services = [
   {
@@ -61,26 +36,24 @@ const services = [
 ];
 
 export function Services() {
-  const servicesControls = useAnimation();
-  const [servicesRef, servicesInView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  if (servicesInView) {
-    servicesControls.start("visible");
-  }
-
   return (
-    <motion.section
+    <MotionSection
       className="py-24 bg-blue-50"
-      ref={servicesRef}
-      initial="hidden"
-      animate={servicesControls}
-      variants={sectionVariants}
+      initial={{ opacity: 0, y: 50 }}
+      variants={{
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: {
+            duration: 0.6,
+            ease: "easeOut",
+          },
+        },
+      }}
+      useIntersectionObserver={true}
     >
       <div className="container mx-auto px-10">
-        <motion.h2
+        <MotionH2
           className="text-3xl md:text-4xl font-light text-center mb-16"
           variants={{
             hidden: { opacity: 0, y: 20 },
@@ -92,15 +65,15 @@ export function Services() {
           }}
         >
           How I Can <span className="font-serif italic text-teal-700">Help You</span>
-        </motion.h2>
+        </MotionH2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {services.map((service, index) => (
-            <motion.div
+            <MotionDiv
               key={index}
               className="p-8 bg-white border border-gray-200 hover:border-blue-200 transition-colors flex flex-col justify-between"
               custom={index}
-              variants={cardVariants}
+              variants={ServicesAnimation.motionDivVariants}
             >
               <div className="w-12 h-12 bg-teal-100 text-teal-700 flex items-center justify-center mb-6">
                 <service.icon size={24} />
@@ -130,10 +103,10 @@ export function Services() {
                   <path d="m12 5 7 7-7 7" />
                 </svg>
               </Link>
-            </motion.div>
+            </MotionDiv>
           ))}
         </div>
       </div>
-    </motion.section>
+    </MotionSection>
   );
 }

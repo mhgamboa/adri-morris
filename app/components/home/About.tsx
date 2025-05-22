@@ -1,48 +1,22 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { motion, useAnimation, type Variants } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import adriIllustrated from "@/assets/images/adri-illustrated.png";
-
-const sectionVariants: Variants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  },
-};
+import MotionDiv from "@/components/animation/wrappers/motion-div";
+import MotionSection from "@/components/animation/wrappers/motion-section";
 
 export function About() {
-  const aboutControls = useAnimation();
-  const [aboutRef, aboutInView] = useInView({
-    triggerOnce: true,
-    threshold: 0.2,
-  });
-
-  if (aboutInView) {
-    aboutControls.start("visible");
-  }
-
   return (
-    <motion.section
+    <MotionSection
       className="py-24 bg-white"
-      ref={aboutRef}
-      initial="hidden"
-      animate={aboutControls}
-      variants={sectionVariants}
+      initial={{ opacity: 1, y: 30 }}
+      variants={{ visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } } }}
+      useIntersectionObserver={true}
     >
       <div className="container mx-auto px-8 sm:px-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, x: -30 }}
-            animate={aboutControls}
             variants={{
               visible: {
                 opacity: 1,
@@ -65,9 +39,8 @@ export function About() {
               build businesses that are not just profitable, but truly aligned with the lives they
               want to live.
             </p>
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0 }}
-              animate={aboutControls}
               variants={{
                 visible: {
                   opacity: 1,
@@ -80,12 +53,11 @@ export function About() {
                   Learn More About Me
                 </Link>
               </Button>
-            </motion.div>
-          </motion.div>
-          <motion.div
+            </MotionDiv>
+          </MotionDiv>
+          <MotionDiv
             className="relative h-[500px]"
             initial={{ opacity: 0, scale: 0.9 }}
-            animate={aboutControls}
             variants={{
               visible: {
                 opacity: 1,
@@ -95,9 +67,9 @@ export function About() {
             }}
           >
             <Image src={adriIllustrated} alt="Adri Morris" fill className="object-contain" />
-          </motion.div>
+          </MotionDiv>
         </div>
       </div>
-    </motion.section>
+    </MotionSection>
   );
 }
