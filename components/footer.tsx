@@ -115,9 +115,9 @@ export default function Footer() {
                 <span className="sr-only">Email</span>
               </a>
             </motion.div>
-            <motion.p className="text-gray-400 text-sm" variants={itemVariants}>
+            {/* <motion.p className="text-gray-400 text-sm" variants={itemVariants}>
               Subscribe to my newsletter for tips, insights, and updates.
-            </motion.p>
+            </motion.p> */}
           </motion.div>
         </div>
 
