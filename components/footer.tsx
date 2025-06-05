@@ -84,7 +84,7 @@ export default function Footer() {
             <h3 className="text-lg font-medium mb-4">Connect</h3>
             <motion.div className="flex space-x-4 mb-6" variants={itemVariants}>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/adri.morris.coaching/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white"
@@ -102,7 +102,7 @@ export default function Footer() {
                 <span className="sr-only">Facebook</span>
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/adrienna-morris/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white"
