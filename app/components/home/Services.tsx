@@ -24,13 +24,13 @@ const services = [
   {
     title: "Profit For Keeps® Coaching",
     description:
-      "Financial coaching to build a life — not just a business. Going beyond understanding your business financials, we will take a deep look at the lifestyle you want and how your business will get you there using the Profit For Keeps system. ",
+      "Financial coaching to build a life — not just a business. Going beyond understanding your business financials, we will take a deep look at the lifestyle you want and how your business will get you there using the Profit For Keeps® system. ",
     icon: TbZoomMoney,
   },
   {
     title: "Coaching for Bookkeepers",
     description:
-      "You've built up a clientele, great processes, and maybe even a team. You work with your clients' finances every day, now it's time to go a little deeper with your own. Together we will build a clear picture of the lifestyle you want, and roadmap to get there using the Profit For Keeps system.",
+      "You've built up a clientele, great processes, and maybe even a team. You work with your clients' finances every day, now it's time to go a little deeper with your own. Together we will build a clear picture of the lifestyle you want, and roadmap to get there using the Profit For Keeps® system.",
     icon: GrGroup,
   },
 ];

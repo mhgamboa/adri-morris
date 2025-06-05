@@ -65,7 +65,7 @@ export default function BioSection() {
               </p>
               <p>
                 Everything started to change when I found the Profit First system. It gave me
-                structure — but it wasn&apos;t until I discovered Profit For Keeps that things
+                structure — but it wasn&apos;t until I discovered Profit For Keeps&reg; that things
                 really clicked. It helped me not just get clear on my numbers, but connect them to
                 the life I actually wanted to live.
               </p>
