@@ -1,78 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { useEffect } from "react";
 import { Mail, MapPin } from "lucide-react";
-import { contactFormSchema, type ContactFormValues } from "@/schema/contact-form-schema";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+
 import { motion, useAnimation, type Variants } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { sendEmail } from "./action";
-import { Turnstile } from "@marsidev/react-turnstile";
+
 import { ContactForm } from "@/components/contact-form";
 
 export default function Contact() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [turnstileToken, setTurnstileToken] = useState<string>("");
-
-  const form = useForm<ContactFormValues>({
-    resolver: zodResolver(contactFormSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-      turnstileToken: "",
-    },
-    mode: "onBlur",
-  });
-
-  const onSubmit = async (data: ContactFormValues) => {
-    if (!turnstileToken) {
-      form.setError("turnstileToken", {
-        type: "manual",
-        message: "Please complete the security check",
-      });
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const formData = new FormData();
-      formData.append("name", data.name);
-      formData.append("email", data.email);
-      formData.append("message", data.message);
-      formData.append("turnstileToken", turnstileToken);
-
-      const result = await sendEmail(formData as FormData & { turnstileToken: string });
-
-      if (result.error) {
-        throw new Error(typeof result.error === "string" ? result.error : "Failed to send message");
-      }
-
-      setIsSubmitted(true);
-      form.reset();
-      setTurnstileToken("");
-    } catch (error) {
-      console.error("Failed to send message:", error);
-      // You might want to show an error message to the user here
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
   // Animation variants
   const heroVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
@@ -242,7 +178,7 @@ export default function Contact() {
                 <h3 className="text-xl font-medium mb-4">Connect With Me</h3>
                 <div className="flex space-x-4">
                   <a
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/adri.morris.coaching/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-teal-100 p-3 rounded-full text-teal-700 hover:bg-teal-200 transition-colors"
@@ -264,7 +200,7 @@ export default function Contact() {
                     </svg>
                     <span className="sr-only">Instagram</span>
                   </a>
-                  <a
+                  {/* <a
                     href="https://facebook.com"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -284,9 +220,9 @@ export default function Contact() {
                       <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
                     </svg>
                     <span className="sr-only">Facebook</span>
-                  </a>
+                  </a> */}
                   <a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/adrienna-morris/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-teal-100 p-3 rounded-full text-teal-700 hover:bg-teal-200 transition-colors"
