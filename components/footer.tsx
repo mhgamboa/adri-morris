@@ -92,7 +92,7 @@ export default function Footer() {
                 <Instagram size={20} />
                 <span className="sr-only">Instagram</span>
               </a>
-              <a
+              {/* <a
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -100,7 +100,7 @@ export default function Footer() {
               >
                 <Facebook size={20} />
                 <span className="sr-only">Facebook</span>
-              </a>
+              </a> */}
               <a
                 href="https://www.linkedin.com/in/adrienna-morris/"
                 target="_blank"
